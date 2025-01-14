@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductController;
+
 
 
 
@@ -139,3 +141,14 @@ Route::prefix('category')->group(function(){
 
 
 });
+
+
+// Admin Products All Route
+
+Route::prefix('product')->group(function(){
+    
+    Route::get('/add', [ProductController::class, 'AddProduct'])->name('add.product');
+      
+    
+    
+    });

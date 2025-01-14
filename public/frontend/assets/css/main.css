@@ -179,6 +179,15 @@ img[src="assets/images/blank.gif"] {
 /*===================================================================================*/
 /*  Layout
 /*===================================================================================*/
+
+/*header style sticky zelf toegevoegd zodat de header altijd zichtbaar blijft ook tijdens het scrollen.*/
+.header-style-1{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+
 .center-block {
   float: none;
 }
