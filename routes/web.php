@@ -105,8 +105,8 @@ Route::prefix('category')->group(function(){
     
     Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
     
-    Route::post('/update', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
-    
+    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+
     Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
 
     // Admin Sub Category All Routes
@@ -128,7 +128,7 @@ Route::prefix('category')->group(function(){
     Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'GetSubCategory']);
 
     Route::get('/sub-subcategory/ajax/{subcategory_id}', [SubCategoryController::class, 'GetSubSubCategory']);
-
+    
     Route::post('/sub/sub/store', [SubCategoryController::class, 'SubSubCategoryStore'])->name('subsubcategory.store');
 
     Route::get('/sub/sub/edit/{id}', [SubCategoryController::class, 'SubSubCategoryEdit'])->name('subsubcategory.edit');
@@ -147,8 +147,8 @@ Route::prefix('category')->group(function(){
 
 Route::prefix('product')->group(function(){
     
-    Route::get('/add', [ProductController::class, 'AddProduct'])->name('add.product');
-      
-    
+    Route::get('/add', [ProductController::class, 'AddProduct'])->name('add-product');
+
+    Route::post('/store', [ProductController::class, 'StoreProduct'])->name('product-store');
     
     });
