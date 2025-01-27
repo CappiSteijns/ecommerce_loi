@@ -36,7 +36,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 // Hier maken wij gebruik van een Route om de admin naar de view 'admin.index' te leiden. Dit gaat eerst door de middelware heen om te verifieren of de gebruiker admin is
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('admin.dashboard');
 
 
 // Admin routes

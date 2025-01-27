@@ -21,6 +21,18 @@
 			  <div class="row">
 				<div class="col">
 
+
+				<!-- Het lukt niet om de data naar de database te importeren. Met deze code kijken we naar errors. -->
+				@if ($errors->any())
+        <div style="color: red;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
   <form method="post" action="{{ route('product-store') }}" enctype="multipart/form-data" >
 		 	@csrf
 
@@ -554,6 +566,8 @@
   });
    
   </script>
+
+  
 
 
 

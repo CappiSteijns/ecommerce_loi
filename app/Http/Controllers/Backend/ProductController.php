@@ -27,10 +27,6 @@ class ProductController extends Controller
 
 	public function StoreProduct(Request $request){
 
-    $request->validate([
-      'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
-    ]);
-
  
         $image = $request->file('product_thambnail');
     	$name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -70,6 +66,7 @@ class ProductController extends Controller
 
       	'product_thambnail' => $save_url,
 
+
       ]);
 
 
@@ -99,7 +96,7 @@ class ProductController extends Controller
 		   'alert-type' => 'success'
 	   );
 
-	   return redirect()->route('manage-product')->with($notification);
+	   return redirect()->back();
 
 
    } // end method
