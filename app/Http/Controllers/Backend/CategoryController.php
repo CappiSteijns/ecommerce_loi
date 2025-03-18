@@ -46,10 +46,9 @@ class CategoryController extends Controller
 
     }
 
-    public function CategoryUpdate(Request $request){
-        $category_id = $request->id;
+    public function CategoryUpdate(Request $request ,$id){
 
-        Category::findOrFail($category_id)->update([
+        Category::findOrFail($id)->update([
             'category_name_en' => $request->category_name_en,
 		    'category_name_nl' => $request->category_name_nl,
 		    'category_slug_en' => strtolower(str_replace(' ', '-',$request->category_name_en)),
@@ -67,5 +66,18 @@ class CategoryController extends Controller
         return redirect()->back();
 
     } // end method
+
+    public function index(){
+    $categories = Category::orderBy('category_name_en', 'ASC')->get();
+    return view('frontend.categories.index', compact('categories'));
+    }
+
+    public function show($id)
+{
+    $category = Category::findOrFail($id);
+    $products = $category->products; // Zorg ervoor dat de relatie in het model is ingesteld
+    return view('frontend.categories.show', compact('category', 'products'));
+}
+
 
 }
