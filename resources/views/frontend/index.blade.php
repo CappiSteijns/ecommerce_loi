@@ -30,8 +30,11 @@
 
                                             @foreach($subcategories as $subcategory)
                                             <div class="col-sm-12 col-md-3">
-                                                <h2 class="title">{{ $subcategory->subcategory_name_en }}
-                                                </h2>
+                                                <a
+                                                    href="{{ url('subcategory/product/'.$subcategory->id.'/'.$subcategory->subcategory_slug_en ) }}">
+                                                    <h2 class="title">{{ $subcategory->subcategory_name_en }}
+                                                    </h2>
+                                                </a>
 
                                                 <!--   // Get SubSubCategory Table Data -->
                                                 @php
@@ -43,8 +46,11 @@
 
                                                 @foreach($subsubcategories as $subsubcategory)
                                                 <ul class="links list-unstyled">
-                                                    <li><a href="#">{{ $subsubcategory->subsubcategory_name_en }}</a>
+                                                    <li><a
+                                                            href="{{ url('subsubcategory/product/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_name_en ) }}">
+                                                            {{ $subsubcategory->subsubcategory_name_en }}</a>
                                                     </li>
+
                                                 </ul>
                                                 @endforeach
                                             </div>

@@ -256,7 +256,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_size_en" class="form-control"
                                                             value="{{ $products->product_size_en }}"
-                                                            data-role="tagsinput" required="">
+                                                            data-role="tagsinput">
                                                         @error('product_size_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -273,7 +273,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_size_nl" class="form-control"
                                                             value="{{ $products->product_size_nl }}"
-                                                            data-role="tagsinput" required="">
+                                                            data-role="tagsinput">
                                                         @error('product_size_nl')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -295,7 +295,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_color_en" class="form-control"
                                                             value="{{ $products->product_color_en }}"
-                                                            data-role="tagsinput" required="">
+                                                            data-role="tagsinput">
                                                         @error('product_color_en')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -311,7 +311,7 @@
                                                     <div class="controls">
                                                         <input type="text" name="product_color_nl" class="form-control"
                                                             value="{{ $products->product_color_nl }}"
-                                                            data-role="tagsinput" required="">
+                                                            data-role="tagsinput">
                                                         @error('product_color_nl')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror

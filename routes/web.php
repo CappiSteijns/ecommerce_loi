@@ -11,6 +11,9 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 
+use App\Http\Controllers\Frontend\CartController;
+
+
 
 
 
@@ -198,3 +201,19 @@ Route::prefix('slider')->group(function(){
     Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
 
 });
+
+// Frontend Product Details Page url 
+
+    Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+
+// Frontend SubCategory
+
+    Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
+// Frontend Sub-SubCategory
+
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
+
+// Product View Modal with Ajax
+
+Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
