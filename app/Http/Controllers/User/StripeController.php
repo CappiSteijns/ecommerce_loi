@@ -25,7 +25,6 @@ class StripeController extends Controller
 
         $total_amount += $request->delivery_cost;
 
-        \Stripe\Stripe::setApiKey('sk_test_51RFFxIH0p25G9JysKdEdQ2fgwGD1cTe5HoB39okE89dvU0ncjve0IxJLyhqhA4DRdUk8rm7X78y31DJ7A5DkKedd00Df5pJfsR');
 
         $token = $_POST['stripeToken'];
         $charge = \Stripe\Charge::create([
