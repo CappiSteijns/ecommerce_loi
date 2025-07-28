@@ -1,3 +1,4 @@
+<!-- Hier tonen we de producten van een specifieke categorie. -->
 @extends('frontend.main_master')
 
 @section('content')

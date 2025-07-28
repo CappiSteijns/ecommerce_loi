@@ -1,63 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# README - Commodum Copia Frontend
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Inhoudsopgave
+1. Inleiding
+2. Projectstructuur
+3. Functionaliteiten
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1. Inleiding
+Goedendag,
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Bij deze de inzendopgave 32760FA2. Hopende dat ik feedback kan krijgen die ik kan gebruiken voor de verplichte en laatste inzendopgaven.
 
-## Learning Laravel
+We hebben vele stappen gemaakt sinds de eerste inzendopgaven. Alles wordt dynamisch weergegeven op de website en alles wordt netjes bijgehouden in databases. 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Verder hebben wij autorisaties en authenticaties, winkelwagen functionaliteiten en gedetailleerde product pagina. 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Verder bieden wij onder andere ook CSRF bescherming en worden bepaalde routes afgeschermed door middlewares. 
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+---
 
-### Premium Partners
+## 2. Projectstructuur
+```
+ecommerce/
+app/
+│
+├── Http/
+│   ├── Controllers/
+│   │   ├── Backend/
+│   │   │   ├── AdminProfileController.php # Beheren van de admin pagina.
+│   │   │   ├── BrandController.php # CRUD voor de brands
+│   │   │   ├── CategoryController.php #  CRUD voor de categorieen
+│   │   │   ├── ProductController.php # CRUD coor de producten
+│   │   │   ├── SliderController.php # CRUD voor de sliders
+│   │   │   ├── SubCategoryController.php # CRUD voor de sub categorieen
+│   │   ├── Frontend/
+│   │   │   ├── CartController.php # Winkelwagen functionaliteiten
+│   │   │   ├── IndexController.php # Homepage, profiel, wachtwoord, productdetails, categorie-weergave
+│   │   ├── User/
+│   │   │   ├── AllUserController.php # Overzicht van de bestellingen voor gebruikers
+│   │   │   ├── CartPageController.php # Weergave en beheren van de winkelwagenpagina
+│   │   │   ├── CheckoutController.php # Checkout en betaalmethode selectie
+│   │   │   ├── StripeController.php # Afhandelen van betaling
+│   │   ├── AdminController.php # Admin login en logout
+│
+├── Models/
+│   ├── Admin.php # Model voor admin-gebruikers
+│   ├── Brand.php # Model voor brands
+│   ├── Category.php # Model voor categorieen
+│   ├── MultiImg.php # Model voor meerde afbeeldingen
+│   ├── Order.php # Model voor bestellingen
+│   ├── OrderItem.php # Model voor items in een bestelling
+│   ├── Product.php # Model voor producten
+│   ├── Slider.php # Model voor sliders
+│   ├── SubCategory.php # Model voor subcategorieen
+│   ├── SubSubCategory.php # Model voor sub-subcategorieen
+│   └── User.php # Model voor gebruikers
+resources/
+│
+├── views/
+│   ├── backend/ # backend is voor de admin only
+│   │   ├── product/
+│   │   │   ├── product_edit.blade.php # Pagina voor het bewerken van producten
+│   │   │   ├── product_view.blade.php # Pagina om de producten te zien.
+│   │   ├── category/
+│   │   │   ├── subcategory_view.blade.php # pagina om subcategorieen te zien
+│   │   │   ├── sub_subcategory_view.blade.php # pagina om de sub-sub categorieen te zien
+│   │   ├── slider/
+│   │      ├── slider_view.blade.php # Pagina om sliders te zien
+│   │      ├── slider_edit.blade.php # Pagina om de sliders te bewerken.
+│   │   
+│   ├── frontend/ # Pagina's voor de gebruikers
+│      ├── index.blade.php # Home pagina
+│      ├── main_master.blade.php # Bevat de layout voor alle pagina's. Header en footer
+│      ├── producten.blade.php # Toont de producten
+│      ├── checkout/
+│      │   └── checkout_view.blade.php # De checkout pagina
+│      └── body/
+│          ├── footer.blade.php # Footer van de website
+│          ├── header.blade.php # Header van de webbbsite
+│          ├── cart.blade.php # Winkelwagen pagina
+│          ├── product_details.blade.php # detailspagina van een product
+│          ├── subcategory_products.blade.php # Producten van subcategorie
+│          └── subsubcategory_products.blade.php # Producten van sub-sub categorieen
+routes/
+│   └── web.php # Alle routes voor front en backend
+│
+└── README.md
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
 
-## Contributing
+## 3. Functionaliteiten
+- **Navigatiestructuur** volgens de specificaties.
+- **Dynamische Blade-template** voor herbruikbare componenten.
+- **Responsive Design** voor desktops en mobiele apparaten.
+- **CRUD-functionaliteiten** voor producten, categorieën, merken en sliders.
+- **Winkelwagenfunctionaliteiten**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# ecommerce_loi
+---

@@ -1,3 +1,4 @@
+<!-- Hier tonen we de brands in een carrousel. -->
 <div id="brands-carousel" class="logo-slider wow fadeInUp">
       <div class="logo-slider-inner">
         <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">

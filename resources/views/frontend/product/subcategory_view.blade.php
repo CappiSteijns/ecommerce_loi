@@ -1,3 +1,4 @@
+<!-- Hier tonen we de subcategorie producten. -->
 @extends('frontend.main_master')
 @section('content')
 @section('title')

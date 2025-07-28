@@ -11,11 +11,14 @@ use Image;
 class BrandController extends Controller
 {
     public function BrandView(){
+        // Hier laten we de laatste merken zien
         $brands = Brand::latest()->get();
         return view('backend.brand.brand_view',compact('brands'));
     }
 
     public function BrandStore(Request $request) {
+        // Hier valideren we de input van het merk
+        // We controleren of de velden zijn ingevuld en of er een afbeelding is geüpload.
         
         $request->validate([
             'brand_name_en' => 'required',
@@ -48,12 +51,15 @@ class BrandController extends Controller
 
 
     public function BrandEdit($id){
+        // Hier halen we het merk op dat we willen bewerken
         $brand = Brand::findOrFail($id);
         return view('backend.brand.brand_edit',compact('brand'));
 
     }
 
     public function BrandUpdate(Request $request){
+        // Hier valideren we de input van het merk
+        // We controleren of de velden zijn ingevuld en of er een afbeelding is geüpload.
         $brand_id = $request->id;
         $old_image = $request->old_image;
 
@@ -89,6 +95,9 @@ class BrandController extends Controller
     } //end mehthod
 
     public function BrandDelete($id){
+        // Hier verwijderen we het merk en de bijbehorende afbeelding
+        // We controleren of het merk bestaat en verwijderen de afbeelding uit de map.
+        // Daarna verwijderen we het merk uit de database.
         $brand = Brand::findOrFail($id);
         $img = $brand->brand_image;
         unlink($img);

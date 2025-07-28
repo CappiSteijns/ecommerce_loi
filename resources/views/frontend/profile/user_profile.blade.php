@@ -1,3 +1,4 @@
+<!-- Hier tonen we de gebruikersprofielpagina. -->
 @extends('frontend.main_master')
 @section('content')
 

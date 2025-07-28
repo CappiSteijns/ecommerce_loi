@@ -538,7 +538,8 @@
                                         style="height: 130px; width: 280px;">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <a href="{{ route('product.multiimg.delete',$img->id) }}" class="btn btn-sm btn-danger" id="delete" title="Delete Data"><i
+                                            <a href="{{ route('product.multiimg.delete',$img->id) }}"
+                                                class="btn btn-sm btn-danger" id="delete" title="Delete Data"><i
                                                     class="fa fa-trash"></i> </a>
                                         </h5>
                                         <p class="card-text">

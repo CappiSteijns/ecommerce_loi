@@ -15,6 +15,7 @@ use App\Models\MultiImg;
 class IndexController extends Controller
 {
     public function index() {
+        // Hier halen we de laatste producten, sliders en categorieën op en tonen we deze in de index view.
         $products = Product::where('status',1)->orderBy('id','DESC')->limit(6)->get();
         $sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $categories = Category::orderBy('category_name_en','ASC')->get();
@@ -23,17 +24,21 @@ class IndexController extends Controller
     }
 
     public function UserLogout() {
+        // Hier loggen we de gebruiker uit en sturen we hem terug naar de login pagina.
         Auth::logout();
         return Redirect()->route('login');
     }
 
     public function UserProfile() {
+        // Hier halen we de ingelogde gebruiker op en tonen we zijn profiel in de user_profile view.
+        // We gebruiken Auth::user() om de ingelogde gebruiker te krijgen en vinden de gebruiker met zijn id.
         $id = Auth::user()->id;
         $user = User::find($id);
         return view('frontend.profile.user_profile',compact('user'));
     }
 
     public function UserProfileStore(Request $request) {
+        // Hier valideren we de input van de gebruiker en slaan we deze op in de database.
         $data = User::find(Auth::user()->id);
         $data->name = $request->name;
         $data->email = $request->email;
@@ -54,16 +59,22 @@ class IndexController extends Controller
     }  //end method
 
     public function UserChangePassword() {
+        // Hier halen we de ingelogde gebruiker op en tonen we zijn wachtwoord wijziging pagina.
+        // We gebruiken Auth::user() om de ingelogde gebruiker te krijgen en vinden de gebruiker met zijn id.
+        // We tonen de gebruiker zijn huidige gegevens in de change_password view.
+        // Deze view bevat een formulier waar de gebruiker zijn oude wachtwoord en nieuwe wachtwoord kan invoeren.
         $id = Auth::user()->id;
         $user = User::find($id);
         return view('frontend.profile.change_password',compact('user'));
     }
 
     public function AdminChangePassword() {
+        // Hier tonen we de admin change password pagina.
         return view('admin.admin_change_password');
     }
 
     public function UserPasswordUpdate(request $request){
+        // Hier valideren we de input van de gebruiker en werken we het wachtwoord bij.
 
         $validateData = $request->validate([
                 'oldpassword' => 'required',
@@ -84,6 +95,7 @@ class IndexController extends Controller
     } //end method
 
     public function ProductDetails($id,$slug){
+        // Hier halen we de productgegevens op op basis van het id en tonen we deze in de product details view.
 		$product = Product::findOrFail($id);
 
 		$color_en = $product->product_color_en;

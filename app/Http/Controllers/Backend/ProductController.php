@@ -18,6 +18,7 @@ class ProductController extends Controller
 {
     
 	public function AddProduct(){
+		// Hier halen we de laatste categorieën en merken op voor de product toevoeging.
 		$categories = Category::latest()->get();
 		$brands = Brand::latest()->get();
 		return view('backend.product.product_add',compact('categories','brands'));
@@ -26,6 +27,7 @@ class ProductController extends Controller
 
 
 	public function StoreProduct(Request $request){
+		// Hier valideren we de input van het product.
 
  
         $image = $request->file('product_thambnail');
@@ -102,12 +104,15 @@ class ProductController extends Controller
    } // end method
 
    public function ManageProduct(){
+	// Hier halen we de laatste producten op en tonen we ze in de product beheer view.
 	$products = Product::latest()->get();
 	return view('backend.product.product_view',compact('products'));
 
    }
 
    public function EditProduct($id){
+	// Hier halen we de product gegevens op die we willen bewerken.
+	// We halen ook de bijbehorende afbeeldingen op.
 
 	$multiImgs = MultiImg::where('product_id',$id)->get();
 
@@ -122,6 +127,7 @@ class ProductController extends Controller
    }
 
    public function ProductDataUpdate(Request $request){
+	// Hier valideren we de input van het product en werken we de gegevens bij.
 
 	$product_id = $request->id;
 
@@ -165,6 +171,7 @@ class ProductController extends Controller
    } // end method
 
    public function MultiImageUpdate(Request $request){
+	// Hier valideren we de input van de afbeeldingen en werken we de afbeeldingen bij.
 	$imgs = $request->multi_img;
 
 	foreach ($imgs as $id => $img) {
@@ -195,6 +202,7 @@ class ProductController extends Controller
    } // end method
 
    public function ThumbnailImageUpdate(Request $request){
+	// Hier valideren we de input van de product thumbnail afbeelding en werken we deze bij.
 	$pro_id = $request->id;
 	$oldImage = $request->old_img;
 	unlink($oldImage);
@@ -235,6 +243,7 @@ class ProductController extends Controller
 	} // end method 
 
 	public function ProductInactive($id){
+	// Hier zetten we de status van het product op inactief (0).
 		Product::findOrFail($id)->update(['status' => 0]);
 		$notification = array(
 		   'message' => 'Product Inactive',
@@ -246,6 +255,7 @@ class ProductController extends Controller
 
 
  public function ProductActive($id){
+	// Hier zetten we de status van het product op actief (1).
 	 Product::findOrFail($id)->update(['status' => 1]);
 		$notification = array(
 		   'message' => 'Product Active',
@@ -257,6 +267,13 @@ class ProductController extends Controller
 	} // End method active and inactive
 
 	public function ProductDelete($id){
+	// Hier verwijderen we het product en de bijbehorende afbeeldingen.
+	// We verwijderen ook de thumbnail afbeelding en alle bijbehorende multi-afbeeldingen.
+		// We gebruiken unlink om de afbeeldingen van de server te verwijderen.
+		// We gebruiken findOrFail om het product op te halen en te verwijderen.
+		// We gebruiken MultiImg om de bijbehorende afbeeldingen op te halen en te verwijderen
+		// We gebruiken unlink om de multi-afbeeldingen van de server te verwijderen.
+		// We gebruiken delete om de multi-afbeeldingen uit de database te verwijderen.
 		$product = Product::findOrFail($id);
 		unlink($product->product_thambnail);
 		Product::findOrFail($id)->delete();

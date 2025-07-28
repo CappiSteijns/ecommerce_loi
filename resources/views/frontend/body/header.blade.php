@@ -1,3 +1,4 @@
+<!-- Hier tonen we de header van de website. -->
 <header class="header-style-1">
 
     <!-- ============================================== TOP MENU ============================================== -->
@@ -8,8 +9,8 @@
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
+                        <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+                        <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>Checkout</a></li>
                         <li>
                             @auth
                             <a href="{{ route('login') }}"><i class="icon fa fa-user"></i>User Profile</a>
@@ -56,8 +57,11 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo"> <a href="{{ url('/') }}"> <img
-                                src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo"> </a> </div>
+                    <div class="logo">
+                        <a href="{{ url('/') }}">
+                            <span class="logo-text">Commodum Copia</span>
+                        </a>
+                    </div>
                     <!-- /.logo -->
                     <!-- ============================================================= LOGO : END ============================================================= -->
                 </div>
@@ -102,54 +106,48 @@
                             data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span> <span
-                                        class="total-price"> <span class="sign">$</span><span
-                                            class="value">600.00</span> </span> </div>
+                                <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
+                                <div class="total-price-basket"> <span class="lbl">cart -</span>
+                                    <span class="total-price"> <span class="sign">€</span>
+                                        <span class="value" id="cartSubTotal"> </span> </span>
+                                </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image"> <a href="detail.html"><img
-                                                        src="{{ asset('frontend/assets/images/cart.jpg') }}" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index.php?page-detail">Simple Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a> </div>
+                                <!--   // Mini Cart Start with Ajax -->
+
+                                <div id="miniCart">
+
+                                </div>
+
+                                <!--   // End Mini Cart Start with Ajax -->
+
+
+                                <div class="clearfix cart-total">
+                                    <div class="pull-right"> <span class="text">Sub Total :</span>
+                                        <span class='price' id="cartSubTotal"> </span>
                                     </div>
                                 </div>
-                                <!-- /.cart-item -->
                                 <div class="clearfix"></div>
-                                <hr>
-                                <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total :</span><span
-                                            class='price'>$600.00</span> </div>
-                                    <div class="clearfix"></div>
-                                    <a href="checkout.html"
-                                        class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
-                                </div>
-                                <!-- /.cart-total-->
-
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-menu-->
+                                <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
                     </div>
-                    <!-- /.dropdown-cart -->
+                    <!-- /.cart-total-->
 
-                    <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                    </li>
+                    </ul>
+                    <!-- /.dropdown-menu-->
                 </div>
-                <!-- /.top-cart-row -->
-            </div>
-            <!-- /.row -->
+                <!-- /.dropdown-cart -->
 
+                <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+            </div>
+            <!-- /.top-cart-row -->
         </div>
-        <!-- /.container -->
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 
     </div>
     <!-- /.main-header -->
@@ -173,7 +171,6 @@
                                         @if(session()->get('language') == 'hindi') घर @else Home @endif
                                     </a> </li>
 
-                                <li><a href="{{ route('categories.index') }}">Categorieën</a></li>
 
 
                                 <!--   // Get Category Table Data -->
@@ -233,7 +230,7 @@
 
                                                     <div class="col-xs-12 col-sm-6 col-md-4 col-menu banner-image">
                                                         <img class="img-responsive"
-                                                            src="{{ asset('frontend/assets/images/banners/top-menu-banner.jpg') }}"
+                                                            src=""
                                                             alt="">
                                                     </div>
                                                     <!-- /.yamm-content -->
@@ -270,6 +267,14 @@
     <!-- /.header-nav -->
     <!-- ============================================== NAVBAR : END ============================================== -->
 
-
+    <style>
+        .logo-text {
+            font-family: 'Bond', sans-serif; 
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; 
+            text-transform: uppercase; 
+        }
+    </style>
 
 </header>

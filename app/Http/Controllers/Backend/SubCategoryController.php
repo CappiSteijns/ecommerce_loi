@@ -14,6 +14,7 @@ use App\Models\SubSubCategory;
 class SubCategoryController extends Controller
 {
     public function SubCategoryView(){
+        // Hier halen we de laatste subcategorieën op en tonen we ze in de view.    
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
         $subcategory = SubCategory::latest()->get();
@@ -24,6 +25,7 @@ class SubCategoryController extends Controller
     }
 
     public function SubCategoryStore(Request $request){
+        // Hier valideren we de input van de subcategorie en slaan we deze op.
         
         $request->validate([
             'category_id' => 'required',
@@ -48,12 +50,16 @@ class SubCategoryController extends Controller
     } //end method
 
     public function SubCategoryEdit($id){
+        // Hier halen we de subcategorie op die we willen bewerken.
+        // We gebruiken findOrFail om de subcategorie op te halen.
+        // We tonen de subcategorie in de subcategory_edit view.
         $categories = Category::orderBy('category_name_en','ASC')->get();
         $subcategory = SubCategory::findOrFail($id);
         return view('backend.category.subcategory_edit',compact('subcategory','categories'));;
     }
 
     public function SubCategoryUpdate(Request $request){
+        // Hier valideren we de input van de subcategorie en werken we de gegevens bij.
         $subcategory_id = $request->id;
 
         SubCategory::findOrFail($subcategory_id)->update([
@@ -69,6 +75,10 @@ class SubCategoryController extends Controller
     } // end method
 
     public function SubCategoryDelete($id){
+        // Hier verwijderen we de subcategorie en alle bijbehorende producten.
+        // We gebruiken findOrFail om de subcategorie op te halen en te verwijderen.
+        // We gebruiken delete om de subcategorie uit de database te verwijderen.
+        // We verwijderen ook de bijbehorende producten.
 
     SubCategory::findOrFail($id)->delete();
         return redirect()->back();
@@ -77,6 +87,7 @@ class SubCategoryController extends Controller
     // Onderstaande is voor de Sub Sub Category
 
     public function SubSubCategoryView(){
+        // Hier halen we de laatste sub-subcategorieën op en tonen we ze in de view.
 
         $categories = Category::orderBy('category_name_en','ASC')->get();
            $subsubcategory = SubSubCategory::latest()->get();
@@ -86,6 +97,8 @@ class SubCategoryController extends Controller
    
     
         public function GetSubCategory($category_id){
+            // Hier halen we de subcategorieën op die bij de geselecteerde categorie horen.
+            // We gebruiken where om de subcategorieën te filteren op basis van de categorie_id
    
             $subcat = SubCategory::where('category_id',$category_id)->orderBy('subcategory_name_en','ASC')->get();
             return json_encode($subcat);
@@ -100,6 +113,7 @@ class SubCategoryController extends Controller
 
 
     public function SubSubCategoryStore(Request $request){
+        // Hier valideren we de input van de sub-subcategorie en slaan we deze op.  
 
         $request->validate([
              'category_id' => 'required',
@@ -129,6 +143,7 @@ class SubCategoryController extends Controller
      } // end method 
 
     public function SubSubCategoryEdit($id){
+        // Hier halen we de sub-subcategorie op die we willen bewerken.
     	$categories = Category::orderBy('category_name_en','ASC')->get();
     	$subcategories = SubCategory::orderBy('subcategory_name_en','ASC')->get();
     	$subsubcategories = SubSubCategory::findOrFail($id);
@@ -137,6 +152,7 @@ class SubCategoryController extends Controller
     }
 
     public function SubSubCategoryUpdate(Request $request){
+        // Hier valideren we de input van de sub-subcategorie en werken we de gegevens bij.
 
     	$subsubcat_id = $request->id;
 
@@ -156,6 +172,9 @@ class SubCategoryController extends Controller
     } // end method 
 
     public function SubSubCategoryDelete($id){
+        // Hier verwijderen we de sub-subcategorie en alle bijbehorende producten.
+        // We gebruiken findOrFail om de sub-subcategorie op te halen en te verwijderen.
+        // We gebruiken delete om de sub-subcategorie uit de database te verwijderen.
         SubSubCategory::findOrFail($id)->delete();
         return redirect()->back();
     }

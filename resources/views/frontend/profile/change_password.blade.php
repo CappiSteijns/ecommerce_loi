@@ -1,3 +1,4 @@
+<!-- Hier tonen we de pagina voor het wijzigen van het wachtwoord van de gebruiker. -->
 @extends('frontend.main_master')
 @section('content')
 <!-- @php

@@ -1,3 +1,4 @@
+<!-- Hier tonen we de categorieën van de website. -->
 @extends('frontend.main_master')
 
 @section('content')

@@ -19,11 +19,13 @@ class SubSubCategory extends Model
     ];
 
     public function category(){
+        // Hier definiëren we de relatie tussen het SubSubCategory model en het Category model.
     	return $this->belongsTo(Category::class,'category_id','id');
     }
 
 
     public function subcategory(){
+        // Hier definiëren we de relatie tussen het SubSubCategory model en het SubCategory model.
     	return $this->belongsTo(SubCategory::class,'subcategory_id','id');
     }
 

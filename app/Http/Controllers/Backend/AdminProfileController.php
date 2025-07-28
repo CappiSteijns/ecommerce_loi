@@ -11,15 +11,18 @@ use Illuminate\Support\Facades\Hash;
 class AdminProfileController extends Controller
 {
     public function AdminProfile() {
+        // Hier halen we de admin data op uit de database.
         $adminData = Admin::find(1); 
         return view('admin.admin_profile_view', compact('adminData')); 
     }
 
     public function AdminProfileEdit() {
+        // Hier halen we de admin data op uit de database voor de bewerk pagina.
         $editData = Admin::find(1); 
         return view('admin.admin_profile_edit', compact('editData'));
     }
     public function AdminProfileStore(Request $request) {
+        // Hier valideren we de input van de admin.
         $data = Admin::find(1);
         $data->name = $request->name;
         $data->email = $request->email;
@@ -39,10 +42,13 @@ class AdminProfileController extends Controller
     } //end method
 
     public function AdminChangePassword() {
+        // Hier tonen we de pagina voor het wijzigen van het wachtwoord.
         return view('admin.admin_change_password');
     }
 
     public function AdminUpdateChangePassword(request $request){
+        // Hier valideren we de input van de admin voor het wijzigen van het wachtwoord.
+        // We controleren of het oude wachtwoord correct is en slaan het nieuwe wachtwoord op als dat het geval is.
 
         $validateData = $request->validate([
                 'oldpassword' => 'required',

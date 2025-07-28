@@ -1,3 +1,4 @@
+<!-- Hier tonen we de product details pagina. -->
 @extends('frontend.main_master')
 @section('content')
 
@@ -330,7 +331,7 @@
                             <div class="product-info">
 
 
-                                <h1 class="name">
+                                <h1 class="name" id="pname">
                                     @if(session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else
                                     {{ $product->product_name_en }} @endif
                                 </h1>
@@ -420,14 +421,15 @@
                                                         <div class="arrow minus gradient"><span class="ir"><i
                                                                     class="icon fa fa-sort-desc"></i></span></div>
                                                     </div>
-                                                    <input type="text" value="1">
+                                                    <input type="text" id="qty" value="1" min="1">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}" min="1">
+
                                         <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                        <button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
                                         </div>
 
 

@@ -10,8 +10,11 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
-
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\AllUserController;
 
 
 
@@ -216,4 +219,41 @@ Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::cl
 
 // Product View Modal with Ajax
 
-Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+    Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+// Add to Cart Store Data
+
+    Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+
+// Get Data from mini cart
+
+    Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
+
+// Remove Mini Cart Product
+    
+    Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+
+// Only accessible for authenticated users (users who are logged in)
+    Route::group(['prefix'=>'user','middleware' => ['user','auth'],'namespace'=>'User'],function(){
+
+        Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+        Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
+        
+    }); 
+
+// My Cart Page All Routes
+
+    Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
+    Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+    Route::get('/user/cart-remove/{rowId}', [CartPageController::class, 'RemoveCartProduct']);
+
+    Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement']);
+    Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
+
+// Checkout routes
+
+    Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+
+    Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
+    Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
